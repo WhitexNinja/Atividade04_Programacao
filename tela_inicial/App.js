@@ -16,8 +16,8 @@ const servicos = [
 ];
 
 const doutores =[
-  {id: '1', nome: 'dr. Olivia Wilson', tipo: 'Consultant', especializacao: 'Physiotherapy' },
-  {id: '2', nome: 'dr. Jonathan Patterson', tipo: 'Consultant', especializacao: 'Internal Medicine'}
+  {id: '1', nome: 'dr. Olivia Wilson', tipo: 'Consultant', especializacao: 'Physiotherapy', avatar: 'https://randomuser.me/api/portraits/women/44.jpg' },
+  {id: '2', nome: 'dr. Jonathan Patterson', tipo: 'Consultant', especializacao: 'Internal Medicine', avatar: 'https://randomuser.me/api/portraits/men/32.jpg'}
 ]
 
 export default function App() {
