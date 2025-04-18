@@ -9,9 +9,12 @@ const DoctorCard = ({ doutor, onPress }) => {
 
       <View style={styles.textoContainer}>
       <Text style={styles.nome}>{doutor.nome}</Text>
+      <View style={{flexDirection: 'row'}}>
       <Text style={styles.tipo}>{doutor.tipo}</Text>
+      <Text> - </Text>
       <Text style={styles.especializacao}>{doutor.especializacao}</Text>
-      <Icon name='star' color='#FFD700'/> 
+      </View>
+      <View style={{flexDirection: 'row'}}> <Icon name='star' color='#FFD700' size={18} style={{marginRight: 4}}/> <Text style={{marginRight: 5}}>{doutor.estrelas}</Text> <Text>({doutor.avaliacoes} Reviews)</Text></View>
       </View>
     </TouchableOpacity>
   );
