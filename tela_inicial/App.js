@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Avatar } from 'react-native-elements';
 import { color } from 'react-native-elements/dist/helpers';
@@ -31,36 +31,53 @@ export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
+        <View style={styles.contaContainer}>
       <Avatar
-        size="small"
+        size="medium"
         rounded
         source={{
           uri:
             'https://www.w3schools.com/howto/img_avatar.png'
-        }}/> <Text style={styles.string}>Welcome Dani Martinez</Text>
+        }}/> 
+        
+        <View style={styles.textContainer}>
+        <Text style={{fontSize: 16, color: 'white', fontWeight: 450}}>Welcome</Text>
+        <Text style={{fontSize: 14, color: 'white'}}>Dani Martinez</Text>
+        </View>
+        </View>
         <View style={styles.inputContainer}>
           <TextInput style={styles.input} placeholder='Search doctor' placeholderTextColor="#999"></TextInput>
           <TouchableOpacity style={styles.iconContainer}><Icon name='magnify' size={24} color={'blue'}/></TouchableOpacity>
           <StatusBar style="auto" />
         </View>
       </View>
-      <Text>Categories</Text> <TouchableOpacity><Text style={{textAlign: 'right'}}>Show all</Text></TouchableOpacity>
+
+      <ScrollView style={styles.scrollArea} contentContainerStyle={{paddingBottom: 120}}>
+      <View style={{paddingHorizontal: 16}}>
+      <View style={styles.categoriesHeader}>
+      <Text style={{fontWeight: 600, fontSize: 18, marginLeft: 12.5}}>Categories</Text> <TouchableOpacity><Text style={{textAlign: 'right', fontWeight: 600, fontSize: 18, marginEnd: 12.5}}>Show All</Text></TouchableOpacity>
+      </View>
+
       <FlatList
         data={servicos}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         numColumns={3}
         contentContainerStyle={styles.list}
+        scrollEnabled={false}
       />
-      <View>
-        <Text>Top doctors</Text>
+
+        <Text style={styles.titles}>Top doctors</Text>
         <FlatList
           data={doutores}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => <DoctorCard doutor={item} />}
+          scrollEnabled={false}
           contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 24 }}
         />
       </View>
+      </ScrollView>
+
       <View style={styles.downContainer}>
         <TouchableOpacity style={styles.navItem}>
           <Icon name='home-outline' color={'white'} size={40} />
@@ -93,9 +110,32 @@ const styles = StyleSheet.create({
     backgroundColor: '#ADD8E6',
   },
 
+  contaContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+
+  textContainer: {
+    marginLeft: 10,
+  },
+
+  scrollArea: {
+    flex: 1,
+  },
+
   string: {
     color: 'white',
     flexDirection: 'row',
+  },
+
+  titles: {
+    fontSize: 18,
+    fontWeight: 600,
+    marginLeft: 10,
+    marginTop: 10,
+    marginBottom: 10
+
   },
 
   topContainer: {
@@ -103,6 +143,8 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 40,
     borderRadius: 10,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
 
   downContainer: {
@@ -120,16 +162,16 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 10,
     height: 45,
-    width: 300,
     backgroundColor: '#fff',
   },
 
   input: {
+    flex: 1,
     color: '#000',
   },
 
   iconContainer: {
-    paddingLeft: 150,
+    paddingLeft: 10,
   },
 
   list: {
@@ -167,4 +209,11 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   
+  categoriesHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+    marginTop: 10,
+  }
+
 });

@@ -13,7 +13,7 @@ const DoctorCard = ({ doutor, onPress }) => {
 
 const styles = StyleSheet.create({
   cartao: {
-    backgroundColor: '#eee',
+    backgroundColor: '#fff',
     padding: 16,
     marginVertical: 8,
     borderRadius: 8,
