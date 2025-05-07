@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Avatar } from 'react-native-elements';
@@ -15,7 +15,7 @@ const servicos = [
   { id: '6', nome: 'Laboratory', icon: 'test-tube' },
 ];
 
-const doutores =[
+const doutores = [
   {id: '1', nome: 'dr. Olivia Wilson', tipo: 'Consultant', especializacao: 'Physiotherapy', avatar: 'https://randomuser.me/api/portraits/women/44.jpg', estrelas: '4.9', avaliacoes: '37' },
   {id: '2', nome: 'dr. Jonathan Patterson', tipo: 'Consultant', especializacao: 'Internal Medicine', avatar: 'https://randomuser.me/api/portraits/men/32.jpg', estrelas: '4.9', avaliacoes: '37'}
 ]
@@ -27,6 +27,22 @@ export default function App() {
       <Text style={styles.label}>{item.nome}</Text>
     </TouchableOpacity>
   );
+
+  const [categorias, setCategorias] = useState([]);
+  const [doutores, setDoutores] = ueState([]);
+
+  useEffect(() => {
+    const fetchDados = async () => {
+      try {
+        const [categoriasResponse, doutoresResponse] = await Promise.all([
+          api.get('/categorias'),
+          api.get('/doutores')
+        ]);
+      } catch (error) {
+        console.error("Erro ao buscar dados:", error);
+      }
+    }
+  })
 
   return (
     <View style={styles.container}>
