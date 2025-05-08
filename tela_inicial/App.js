@@ -3,22 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Avatar } from 'react-native-elements';
-import { color } from 'react-native-elements/dist/helpers';
 import DoctorCard from './components/DoctorCard';
+import api from './services/api';
 
-const servicos = [
-  { id: '1', nome: 'Consultation', icon: 'account-box-outline' },
-  { id: '2', nome: 'Dentist', icon: 'tooth-outline' },
-  { id: '3', nome: 'Cardiologist', icon: 'heart-pulse' },
-  { id: '4', nome: 'Hospital', icon: 'hospital-building' },
-  { id: '5', nome: 'Emergency', icon: 'ambulance' },
-  { id: '6', nome: 'Laboratory', icon: 'test-tube' },
-];
-
-const doutores = [
-  {id: '1', nome: 'dr. Olivia Wilson', tipo: 'Consultant', especializacao: 'Physiotherapy', avatar: 'https://randomuser.me/api/portraits/women/44.jpg', estrelas: '4.9', avaliacoes: '37' },
-  {id: '2', nome: 'dr. Jonathan Patterson', tipo: 'Consultant', especializacao: 'Internal Medicine', avatar: 'https://randomuser.me/api/portraits/men/32.jpg', estrelas: '4.9', avaliacoes: '37'}
-]
 
 export default function App() {
   const renderItem = ({item}) => (
@@ -29,7 +16,7 @@ export default function App() {
   );
 
   const [categorias, setCategorias] = useState([]);
-  const [doutores, setDoutores] = ueState([]);
+  const [doutores, setDoutores] = useState([]);
 
   useEffect(() => {
     const fetchDados = async () => {
@@ -38,11 +25,15 @@ export default function App() {
           api.get('/categorias'),
           api.get('/doutores')
         ]);
+        setCategorias(categoriasResponse.data);
+        setDoutores(doutoresResponse.data);
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
       }
-    }
-  })
+    };
+
+    fetchDados();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -75,7 +66,7 @@ export default function App() {
       </View>
 
       <FlatList
-        data={servicos}
+        data={categorias}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         numColumns={3}
