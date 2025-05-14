@@ -17,14 +17,17 @@ export default function App() {
 
   const [categorias, setCategorias] = useState([]);
   const [doutores, setDoutores] = useState([]);
+  const [usuario, setUsuario] = useState('');
 
   useEffect(() => {
     const fetchDados = async () => {
       try {
-        const [categoriasResponse, doutoresResponse] = await Promise.all([
+        const [usuariosResponse, categoriasResponse, doutoresResponse] = await Promise.all([
+          api.get('/usuario'),
           api.get('/categorias'),
           api.get('/doutores')
         ]);
+        setUsuario(usuariosResponse.data[0]);
         setCategorias(categoriasResponse.data);
         setDoutores(doutoresResponse.data);
       } catch (error) {
@@ -44,12 +47,12 @@ export default function App() {
         rounded
         source={{
           uri:
-            'https://www.w3schools.com/howto/img_avatar.png'
+            usuario.avatar
         }}/> 
         
         <View style={styles.textContainer}>
         <Text style={{fontSize: 16, color: 'white', fontWeight: 450}}>Welcome</Text>
-        <Text style={{fontSize: 14, color: 'white'}}>Dani Martinez</Text>
+        <Text style={{fontSize: 14, color: 'white'}}>{usuario.nome}</Text>
         </View>
         </View>
         <View style={styles.inputContainer}>

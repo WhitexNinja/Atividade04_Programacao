@@ -1,11 +1,18 @@
 {
+
+    "usuario": [
+        {
+            "id": "1", "nome": "Dani Martinez", "avatar": "https://randomuser.me/api/portraits/men/9.jpg"
+        }
+    ],
+
     "categorias": [
         {
             "id": "1", "nome": "Consultation", "icon": "account-box-outline"
         },
 
         {
-            "id": "2", "nome": "Dentist", "icon": "tooth-outline"
+            "id": "2", "nome": "Dentista", "icon": "tooth-outline"
         },
 
         {
@@ -27,7 +34,7 @@
 
     "doutores": [
         {
-            "id": "1", "nome": "dr. Olivia Wilson", "tipo": "Consultant", "especializacao": "Physiotherapy", "avatar": "https://randomuser.me/api/portraits/women/44.jpg", "estrelas": "4.9", "avaliacoes": "37"
+            "id": "1", "nome": "dr. Olivia Wilson", "tipo": "Consultant", "especializacao": "Physiotherapy", "avatar": "https://randomuser.me/api/portraits/women/44.jpg", "estrelas": "5.0", "avaliacoes": "37"
         },
 
         {
